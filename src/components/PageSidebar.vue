@@ -8,20 +8,21 @@
       <div class="options">
         <nav>
           <ul>
-            <li>
+            <li :class="{ active: activeTab === 'all' }" @click="selectTab('all')">
               <div class="circle">
                 <img src="../assets/icons/icon-tick.svg" alt="icon-.svg" />
               </div>
-              Все
+              <h4>Все</h4>
             </li>
-            <li>
+            <li :class="{ active: activeTab === 'processed' }" @click="selectTab('processed')">
               <div class="circle">
                 <img src="../assets/icons/icon-tick.svg" alt="icon-tick" />
               </div>
-              Обработанные
+              <h4>Обработанные</h4>
             </li>
-            <li>
-              <img src="../assets/icons/icon-pending.svg" alt="icon-pending" />Не обработанные
+            <li :class="{ active: activeTab === 'pending' }" @click="selectTab('pending')">
+              <img src="../assets/icons/icon-pending.svg" alt="icon-pending" />
+              <h4>Не обработанные</h4>
             </li>
           </ul>
         </nav>
@@ -29,6 +30,19 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  props: {
+    activeTab: String,
+  },
+  methods: {
+    selectTab(tab) {
+      this.$emit('activeTab', tab)
+    },
+  },
+}
+</script>
 
 <style scoped>
 .sidebar {
@@ -62,8 +76,12 @@ ul {
 li {
   display: flex;
   gap: 20px;
+  cursor: pointer;
 }
 li:not(:last-child) {
   margin-bottom: 27px;
+}
+.active {
+  color: #0f4c82;
 }
 </style>

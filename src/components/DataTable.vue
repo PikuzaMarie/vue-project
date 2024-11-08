@@ -2,7 +2,7 @@
   <div class="container">
     <div class="header">
       <div class="title">
-        <h2>Обработанные</h2>
+        <h2>{{ heading }}</h2>
         <button class="btn transparent">
           <img src="../assets/icons/icon-refresh.svg" alt="icon-refresh" />
         </button>
@@ -80,25 +80,9 @@
 
 <script>
 export default {
-  data() {
-    return {
-      profiles: [],
-    }
-  },
-  mounted() {
-    this.fetchProfiles()
-  },
-  methods: {
-    fetchProfiles() {
-      fetch('https://retoolapi.dev/wHFLgA/data?_limit=5')
-        .then((response) => response.json())
-        .then((data) => {
-          this.profiles = data
-        })
-        .catch((error) => {
-          console.error('Ошибка при попытке загрузки данных:', error)
-        })
-    },
+  props: {
+    profiles: Array,
+    heading: String,
   },
 }
 </script>
